@@ -1,0 +1,15 @@
+Quantatative Finance Semester 2 2021
+
+Requirements: python + pip 
+
+Installation and Run:
+
+    1. pip install -r requirements.txt
+
+    2. Download ta-library
+        2.1 Windows installation:
+            pip install ta-lib/<filename.whl> (filename corrosponds to your version of python, e.g cp39 is python 3.9)
+        2.2 Linux installation: 
+            https://sachsenhofer.io/install-ta-lib-ubuntu-server/
+
+    3. python momentum_algorithm.py 
