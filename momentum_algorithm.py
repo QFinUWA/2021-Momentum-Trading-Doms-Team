@@ -6,11 +6,11 @@ from sklearn.model_selection import train_test_split
 from gemini_modules import engine
 
 # read in data preserving dates
-df = pd.read_csv("data/USDT_XRP.csv", parse_dates=[0])
+df = pd.read_csv("data/USDT_ADA.csv", parse_dates=[0])
 
 # globals
 TRAINING_PERIOD = 15
-ALPHA = 0.3
+ALPHA = 0.4
 
 #backtesting
 # train, test = train_test_split(df, test_size = 0.3, shuffle = False)
@@ -30,9 +30,8 @@ def logic(account, lookback):
             volumn_moving_average = lookback['volume'].rolling(window=TRAINING_PERIOD).mean()[today]  # update VMA
 
 
-
             if(lookback['close'][today] < INDICATOR):
-                if(lookback['volume'][today] > volumn_moving_average):
+                if(lookback['volume'][today] < volumn_moving_average):
                     if(account.buying_power > 0):
                         account.enter_position('long', account.buying_power, lookback['close'][today])
             else:
@@ -45,10 +44,14 @@ def logic(account, lookback):
     pass  # Handles lookback errors in beginning of dataset
 
 def apply_fee(account):
-    return 0.999
+    pass
 
 
 if __name__ == "__main__":
     backtest.start(100, logic)
     backtest.results()
+
+    # Y of our hyperparam optimisation
+    print(backtest.performance())
+
     backtest.chart()

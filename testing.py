@@ -7,8 +7,7 @@ df = pd.read_csv('./data/USDT_XRP.csv')
 train, test = train_test_split(df, test_size = 0.3, shuffle = False)
 
 train['sma_20'] = train['close'].rolling(10).mean()
-train['ema1'] = train['close'].ewm(alpha = 0.1, adjust = False).mean()
-train['ema2'] = train['close'].ewm(alpha = 0.3, adjust = False).mean()
-train[['close','sma_20', 'ema1', 'ema2']].plot(linewidth = 1)
+train['ema1'] = train['close'].ewm(alpha = 0.4, adjust = False).mean()
+train[['close','sma_20', 'ema1']].plot(linewidth = 1)
 
 plt.show()
